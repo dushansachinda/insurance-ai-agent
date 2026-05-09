@@ -97,6 +97,7 @@ start_python_service() {
         export MCP_CREDIT_CHECK_URL="http://localhost:8003/mcp"
         export BUREAU_ALPHA_URL="http://localhost:8004"
         export BUREAU_BETA_URL="http://localhost:8005"
+        export UNDERWRITING_AGENT_URL="http://localhost:8006"
 
         nohup "${cmd[@]}" > "${LOG_DIR}/${name}.log" 2>&1 &
         local pid=$!
@@ -130,8 +131,8 @@ if [ ${missing} -ne 0 ]; then
 fi
 
 # Free up the ports we use
-print_status "Clearing ports 8000, 8001, 8003, 8004, 8005, 3000..."
-for port in 8000 8001 8003 8004 8005 3000; do
+print_status "Clearing ports 8000, 8001, 8003, 8004, 8005, 8006, 3000..."
+for port in 8000 8001 8003 8004 8005 8006 3000; do
     if ! check_port "${port}"; then
         kill_port "${port}"
     fi
@@ -151,6 +152,10 @@ start_python_service "bureau-beta" "credit-bureaus" 8005 \
 # MCP Credit Check server (FastMCP, started via its own server.py)
 start_python_service "mcp-credit-check" "mcp-credit-check-server" 8003 \
     python server.py
+
+# Underwriting agent (AutoGen + FastAPI)
+start_python_service "underwriting-agent" "underwriting-agent" 8006 \
+    uvicorn "app.main:app" --host 0.0.0.0 --port 8006
 
 # Supervisor agent (AutoGen + WebSocket)
 start_python_service "supervisor-agent" "supervisor-agent" 8000 \
@@ -204,7 +209,8 @@ if lsof -Pi ":8003" -sTCP:LISTEN -t >/dev/null 2>&1; then
 else
     print_warning "mcp-credit-check not listening on port 8003 (may still be starting)"
 fi
-check_health "supervisor-agent" "http://localhost:8000/health"
+check_health "underwriting-agent" "http://localhost:8006/health"
+check_health "supervisor-agent"   "http://localhost:8000/health"
 check_health "frontend"         "http://localhost:3000"
 
 echo ""
@@ -215,8 +221,9 @@ echo "  Frontend:         http://localhost:3000"
 echo "  Backend API:      http://localhost:8001"
 echo "  Supervisor agent: ws://localhost:8000/chat"
 echo "  MCP credit check: http://localhost:8003/mcp"
-echo "  BureauAlpha:      http://localhost:8004"
-echo "  BureauBeta:       http://localhost:8005"
+echo "  BureauAlpha:        http://localhost:8004"
+echo "  BureauBeta:         http://localhost:8005"
+echo "  Underwriting agent: http://localhost:8006"
 echo ""
 echo "Logs:  tail -f logs/<service>.log"
 echo "Stop:  ./stop-services.sh"

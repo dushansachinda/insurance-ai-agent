@@ -13,6 +13,7 @@ from .data_store import DataStore
 from .schemas import (
     Application,
     ApplicationCreate,
+    ApplicationUnderwriteUpdate,
     Claim,
     Customer,
     CustomerCreate,
@@ -167,6 +168,26 @@ def create_application(
     )
     store.applications[new_id] = application
     return application
+
+
+@app.patch("/api/applications/{application_id}", response_model=Application)
+def underwrite_application(
+    application_id: str,
+    update: ApplicationUnderwriteUpdate,
+    store: DataStore = Depends(get_store),
+) -> Application:
+    """Called by the underwriting agent to record its decision."""
+    application = store.applications.get(application_id)
+    if not application:
+        raise HTTPException(status_code=404, detail=f"Application {application_id} not found")
+    updated = application.model_copy(update={
+        "status": update.status,
+        "underwriting_notes": update.underwriting_notes,
+        "underwriting_agent": update.underwriting_agent,
+        "underwritten_at": update.underwritten_at,
+    })
+    store.applications[application_id] = updated
+    return updated
 
 
 # Claims -----------------------------------------------------------------

@@ -5,6 +5,7 @@ and docstrings to expose them to the LLM as tools. No auth wrappers - the
 backend service is reached via plain HTTP within the trusted network.
 """
 
+import asyncio
 import logging
 import os
 from typing import Any
@@ -14,6 +15,7 @@ import httpx
 logger = logging.getLogger(__name__)
 
 BACKEND_BASE_URL = os.getenv("BACKEND_BASE_URL", "http://backend:8001")
+UNDERWRITING_AGENT_URL = os.getenv("UNDERWRITING_AGENT_URL", "http://underwriting-agent:8006")
 HTTP_TIMEOUT = 30.0
 
 
@@ -169,7 +171,22 @@ async def create_policy_application(
         "requested_deductible": deductible,
     }
     application = await _post("/api/applications", payload)
+
+    # Notify the underwriting agent — fire and forget, user gets response immediately.
+    asyncio.create_task(_trigger_underwriting(application["application_id"]))
+
     return {**application, "credit_report": credit_report}
+
+
+async def _trigger_underwriting(application_id: str) -> None:
+    url = f"{UNDERWRITING_AGENT_URL.rstrip('/')}/review"
+    logger.info(f"[tools] Triggering underwriting review for {application_id} at {url}")
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            resp = await client.post(url, json={"application_id": application_id})
+            logger.info(f"[tools] Underwriting agent accepted review: {resp.status_code}")
+    except Exception as e:
+        logger.warning(f"[tools] Could not reach underwriting agent: {e}")
 
 
 # ---------------------------------------------------------------------------

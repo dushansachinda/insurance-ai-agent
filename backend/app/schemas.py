@@ -76,6 +76,16 @@ class Application(BaseModel):
     submitted_at: str
     decision_reason: Optional[str] = None
     quoted_premium_monthly: Optional[float] = None
+    underwriting_notes: Optional[str] = None
+    underwriting_agent: Optional[str] = None
+    underwritten_at: Optional[str] = None
+
+
+class ApplicationUnderwriteUpdate(BaseModel):
+    status: ApplicationStatus
+    underwriting_notes: str
+    underwriting_agent: str
+    underwritten_at: str
 
 
 class ApplicationCreate(BaseModel):

@@ -54,6 +54,28 @@ services:
       bureau-beta:
         condition: service_healthy
 
+  underwriting-agent:
+    build: ./underwriting-agent
+    container_name: insurance-underwriting-agent
+    ports:
+      - "8006:8006"
+    environment:
+      - PYTHONPATH=/app
+      - BACKEND_BASE_URL=http://backend:8001
+      - MCP_CREDIT_CHECK_URL=http://mcp-credit-check:8003/mcp
+    env_file:
+      - ./underwriting-agent/.env
+    depends_on:
+      backend:
+        condition: service_healthy
+      mcp-credit-check:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8006/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
   supervisor-agent:
     build: ./supervisor-agent
     container_name: insurance-supervisor-agent
@@ -61,6 +83,7 @@ services:
       - "8000:8000"
     environment:
       - PYTHONPATH=/app
+      - UNDERWRITING_AGENT_URL=http://underwriting-agent:8006
     env_file:
       - ./supervisor-agent/.env
     depends_on:
@@ -68,6 +91,8 @@ services:
         condition: service_healthy
       mcp-credit-check:
         condition: service_started
+      underwriting-agent:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
