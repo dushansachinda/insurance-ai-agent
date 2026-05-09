@@ -183,51 +183,108 @@ Both the supervisor and underwriting agents need `GEMINI_API_KEY`.
 
 ## Demo Scenarios
 
-### 1. New policy application (with underwriting)
+### Policy application — Approved ✅
 
+**Customer:** CUST-0001 · Alice Johnson · SSN last 4: `0008`
+Credit composite: **778** (BureauAlpha 755, BureauBeta 802) — tier: low
+
+**Chat input:**
 ```
-User:  I'd like a quote on a new auto policy. I'm existing customer CUST-0001.
-       Vehicle: 2022 Honda Civic, VIN 1HGCM82633A123456.
-       Driver: Alice Johnson, D1234567, 10 years. Full coverage, $500 deductible.
-       SSN last 4: 0008.
-
-Agent: [calls create_policy_application]
-         → credit_check via MCP → BureauAlpha (755) + BureauBeta (802) → approved
-         → POST /api/applications → APP-XXXX pending
-         → POST /review to underwriting-agent (fire & forget)
-
-       Your application APP-XXXX has been submitted.
-       Quoted premium: $155.00/month. Credit composite score: 778, tier: low.
-
-[background — underwriting agent]
-         → get_application, get_customer, credit_check via MCP
-         → rules: driver ✓, vehicle age ✓, deductible ✓, credit ✓ → approved
-         → Gemini writes rationale
-         → PATCH APP-XXXX → status: approved
-
-User visits Policies page → sees APP-XXXX: approved
+I'd like a new auto insurance policy. I'm an existing customer with customer
+ID CUST-0001. The vehicle is a 2022 Honda Civic, VIN 1HGCM82633A123456.
+Driver information: Alice Johnson, driver's license D1234567, licensed for
+10 years. Requested coverage is full coverage with a $500 deductible.
+Last four digits of SSN: 0008.
 ```
 
-> **Tip:** SSN `0008` for CUST-0001 produces composite score 778 (both bureaus approve).
-> SSN `4821` (stored on CUST-0001) produces score 660 (elevated → needs_review).
-
-### 2. Existing policy lookup
-
+**What happens:**
 ```
-User:  List the policies for customer CUST-0001.
-Agent: [calls list_customer_policies]
-       Policy POL-0001 — 2021 Toyota Camry, full coverage, $500 deductible,
-       premium $145/month, active.
+Supervisor  → create_policy_application
+              → credit_check via MCP (composite 778, low) → application submitted
+              → POST /review to underwriting-agent (fire & forget)
+              → responds to user with APP-XXXX, premium $155/month
+
+Background  → underwriting-agent fetches application + customer + credit check
+              → all 4 rules pass → Gemini writes approval rationale
+              → PATCH APP-XXXX → status: approved
 ```
 
-### 3. Knowledge base Q&A
+---
 
+### Policy application — Needs Review 🔍
+
+**Customer:** CUST-0002 · Bob Smith · SSN last 4: `0004`
+Credit composite: **710** (elevated tier) — manual review required
+
+**Chat input:**
 ```
-User:  What is collision coverage and how is it different from comprehensive?
-Agent: [calls search_knowledge_base → get_knowledge_base_article × 2]
-       Collision covers damage from accidents regardless of fault.
-       Comprehensive covers non-collision losses: theft, hail, fire, animals…
+I'd like a new auto insurance policy. I'm an existing customer with customer
+ID CUST-0002. The vehicle is a 2020 Ford F-150, VIN 1FTFW1E50MFA12345.
+Driver information: Bob Smith, driver's license TX-5678901, licensed for
+8 years. Requested coverage is full coverage with a $500 deductible.
+Last four digits of SSN: 0004.
 ```
+
+**What happens:**
+```
+Supervisor  → create_policy_application
+              → credit_check via MCP (composite 710, elevated) → application submitted
+              → POST /review to underwriting-agent (fire & forget)
+              → responds to user with APP-XXXX, premium quoted
+
+Background  → underwriting-agent: credit tier elevated → FLAG
+              → Gemini writes review rationale
+              → PATCH APP-XXXX → status: needs_review
+```
+
+---
+
+### Policy application — Declined ❌
+
+**Customer:** CUST-0003 · Carol Davis · SSN last 4: `0000`
+Credit composite: **558** (BureauAlpha 568, BureauBeta 549) — tier: high
+
+**Chat input:**
+```
+I'd like a new auto insurance policy. I'm an existing customer with customer
+ID CUST-0003. The vehicle is a 2019 Toyota Camry, VIN 4T1BF1FK5MU654321.
+Driver information: Carol Davis, driver's license WA-3456789, licensed for
+6 years. Requested coverage is full coverage with a $500 deductible.
+Last four digits of SSN: 0000.
+```
+
+**What happens:**
+```
+Supervisor  → create_policy_application
+              → credit_check via MCP (composite 558, high) → DECLINED
+              → application not submitted, user informed politely
+
+              (No underwriting review triggered — credit check blocked submission)
+```
+
+---
+
+### Existing policy lookup
+
+**Chat input:**
+```
+Can you list the policies for customer CUST-0001?
+```
+
+Agent calls `list_customer_policies` and returns policy details for
+POL-0001 (2021 Toyota Camry, full coverage, $145/month, active).
+
+---
+
+### Knowledge base Q&A
+
+**Chat input:**
+```
+What is collision coverage and how is it different from comprehensive?
+```
+
+Agent calls `search_knowledge_base` then fetches both articles and
+explains the difference in plain language with article citations.
 
 ---
 
