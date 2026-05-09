@@ -6,7 +6,7 @@
     "email": "alice.johnson@example.com",
     "phone": "+1-415-555-0142",
     "dob": "1988-03-14",
-    "ssn_last4": "4821",
+    "ssn_last4": "0008",
     "address": {
       "street": "742 Evergreen Terrace",
       "city": "San Francisco",
@@ -21,7 +21,7 @@
     "email": "bob.smith@example.com",
     "phone": "+1-512-555-0188",
     "dob": "1979-11-02",
-    "ssn_last4": "1029",
+    "ssn_last4": "0004",
     "address": {
       "street": "1100 Congress Ave",
       "city": "Austin",
@@ -36,7 +36,7 @@
     "email": "carol.davis@example.com",
     "phone": "+1-206-555-0167",
     "dob": "1995-06-21",
-    "ssn_last4": "7733",
+    "ssn_last4": "0000",
     "address": {
       "street": "455 Pine Street",
       "city": "Seattle",
