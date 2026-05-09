@@ -1,0 +1,99 @@
+[
+  {
+    "application_id": "APP-0001",
+    "customer_id": "CUST-0003",
+    "vehicle": {
+      "vin": "2HGFE2F50PH334411",
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2023
+    },
+    "drivers": [
+      {
+        "name": "Carol Davis",
+        "license_number": "WA-D5566778",
+        "years_licensed": 9
+      }
+    ],
+    "requested_coverage": "comprehensive",
+    "requested_deductible": 500,
+    "status": "approved",
+    "submitted_at": "2024-02-25T14:32:00Z",
+    "decision_reason": "Clean driving record and modern vehicle.",
+    "quoted_premium_monthly": 135.00
+  },
+  {
+    "application_id": "APP-0002",
+    "customer_id": "CUST-0004",
+    "vehicle": {
+      "vin": "1G1ZT53806F112233",
+      "make": "Chevrolet",
+      "model": "Malibu",
+      "year": 2006
+    },
+    "drivers": [
+      {
+        "name": "David Martinez",
+        "license_number": "CO-M2233445",
+        "years_licensed": 22
+      }
+    ],
+    "requested_coverage": "full",
+    "requested_deductible": 250,
+    "status": "declined",
+    "submitted_at": "2024-04-08T09:15:00Z",
+    "decision_reason": "Vehicle age exceeds underwriting guidelines for full coverage.",
+    "quoted_premium_monthly": null
+  },
+  {
+    "application_id": "APP-0003",
+    "customer_id": "CUST-0005",
+    "vehicle": {
+      "vin": "5YJ3E1EA7NF445566",
+      "make": "Tesla",
+      "model": "Model 3",
+      "year": 2022
+    },
+    "drivers": [
+      {
+        "name": "Emma Nguyen",
+        "license_number": "MA-N3344556",
+        "years_licensed": 12
+      }
+    ],
+    "requested_coverage": "full",
+    "requested_deductible": 500,
+    "status": "pending",
+    "submitted_at": "2026-05-01T11:00:00Z",
+    "decision_reason": null,
+    "quoted_premium_monthly": 155.00
+  },
+  {
+    "application_id": "APP-0004",
+    "customer_id": "CUST-0001",
+    "vehicle": {
+      "vin": "JN1AZ4EH8FM550011",
+      "make": "Nissan",
+      "model": "370Z",
+      "year": 2015
+    },
+    "drivers": [
+      {
+        "name": "Alice Johnson",
+        "license_number": "CA-D1234567",
+        "years_licensed": 18
+      },
+      {
+        "name": "Tyler Johnson",
+        "license_number": "CA-J7788990",
+        "years_licensed": 2
+      }
+    ],
+    "requested_coverage": "collision",
+    "requested_deductible": 1000,
+    "status": "needs_review",
+    "submitted_at": "2026-04-22T16:45:00Z",
+    "decision_reason": "Secondary driver has fewer than 3 years licensed; manual review required.",
+    "quoted_premium_monthly": 105.00
+  }
+]

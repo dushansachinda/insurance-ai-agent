@@ -1,0 +1,81 @@
+services:
+  backend:
+    build: ./backend
+    container_name: insurance-backend
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONPATH=/app
+    env_file:
+      - ./backend/.env
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  bureau-alpha:
+    build: ./credit-bureaus
+    container_name: insurance-bureau-alpha
+    command: uvicorn bureau_alpha:app --host 0.0.0.0 --port 8004
+    ports:
+      - "8004:8004"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8004/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  bureau-beta:
+    build: ./credit-bureaus
+    container_name: insurance-bureau-beta
+    command: uvicorn bureau_beta:app --host 0.0.0.0 --port 8005
+    ports:
+      - "8005:8005"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8005/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  mcp-credit-check:
+    build: ./mcp-credit-check-server
+    container_name: insurance-mcp-credit-check
+    ports:
+      - "8003:8003"
+    environment:
+      - BUREAU_ALPHA_URL=http://bureau-alpha:8004
+      - BUREAU_BETA_URL=http://bureau-beta:8005
+    env_file:
+      - ./mcp-credit-check-server/.env
+    depends_on:
+      bureau-alpha:
+        condition: service_healthy
+      bureau-beta:
+        condition: service_healthy
+
+  supervisor-agent:
+    build: ./supervisor-agent
+    container_name: insurance-supervisor-agent
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+    env_file:
+      - ./supervisor-agent/.env
+    depends_on:
+      backend:
+        condition: service_healthy
+      mcp-credit-check:
+        condition: service_started
+
+  frontend:
+    build: ./frontend
+    container_name: insurance-frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+      - supervisor-agent

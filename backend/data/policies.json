@@ -1,0 +1,145 @@
+[
+  {
+    "policy_id": "POL-0001",
+    "customer_id": "CUST-0001",
+    "vehicle": {
+      "vin": "4T1BF1FK5MU123456",
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2021
+    },
+    "drivers": [
+      {
+        "name": "Alice Johnson",
+        "license_number": "CA-D1234567",
+        "years_licensed": 18
+      }
+    ],
+    "coverage_type": "full",
+    "deductible": 500,
+    "premium_monthly": 145.00,
+    "status": "active",
+    "effective_date": "2024-01-15",
+    "expiration_date": "2025-01-15"
+  },
+  {
+    "policy_id": "POL-0002",
+    "customer_id": "CUST-0002",
+    "vehicle": {
+      "vin": "1FTFW1ET8JFA98765",
+      "make": "Ford",
+      "model": "F-150",
+      "year": 2018
+    },
+    "drivers": [
+      {
+        "name": "Bob Smith",
+        "license_number": "TX-S9876543",
+        "years_licensed": 25
+      }
+    ],
+    "coverage_type": "collision",
+    "deductible": 1000,
+    "premium_monthly": 112.50,
+    "status": "active",
+    "effective_date": "2023-08-01",
+    "expiration_date": "2025-08-01"
+  },
+  {
+    "policy_id": "POL-0003",
+    "customer_id": "CUST-0003",
+    "vehicle": {
+      "vin": "2HGFE2F50PH334411",
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2023
+    },
+    "drivers": [
+      {
+        "name": "Carol Davis",
+        "license_number": "WA-D5566778",
+        "years_licensed": 9
+      }
+    ],
+    "coverage_type": "comprehensive",
+    "deductible": 500,
+    "premium_monthly": 135.00,
+    "status": "active",
+    "effective_date": "2024-03-10",
+    "expiration_date": "2025-03-10"
+  },
+  {
+    "policy_id": "POL-0004",
+    "customer_id": "CUST-0004",
+    "vehicle": {
+      "vin": "1C4RJFAG5LC112233",
+      "make": "Jeep",
+      "model": "Grand Cherokee",
+      "year": 2020
+    },
+    "drivers": [
+      {
+        "name": "David Martinez",
+        "license_number": "CO-M2233445",
+        "years_licensed": 22
+      }
+    ],
+    "coverage_type": "full",
+    "deductible": 1000,
+    "premium_monthly": 158.75,
+    "status": "cancelled",
+    "effective_date": "2023-05-01",
+    "expiration_date": "2024-05-01"
+  },
+  {
+    "policy_id": "POL-0005",
+    "customer_id": "CUST-0005",
+    "vehicle": {
+      "vin": "5YJ3E1EA7NF445566",
+      "make": "Tesla",
+      "model": "Model 3",
+      "year": 2022
+    },
+    "drivers": [
+      {
+        "name": "Emma Nguyen",
+        "license_number": "MA-N3344556",
+        "years_licensed": 12
+      }
+    ],
+    "coverage_type": "full",
+    "deductible": 500,
+    "premium_monthly": 172.40,
+    "status": "expired",
+    "effective_date": "2022-04-12",
+    "expiration_date": "2024-04-12"
+  },
+  {
+    "policy_id": "POL-0006",
+    "customer_id": "CUST-0002",
+    "vehicle": {
+      "vin": "3VWDB7AJ5HM778899",
+      "make": "Volkswagen",
+      "model": "Jetta",
+      "year": 2017
+    },
+    "drivers": [
+      {
+        "name": "Bob Smith",
+        "license_number": "TX-S9876543",
+        "years_licensed": 25
+      },
+      {
+        "name": "Linda Smith",
+        "license_number": "TX-S5544332",
+        "years_licensed": 20
+      }
+    ],
+    "coverage_type": "liability",
+    "deductible": 1000,
+    "premium_monthly": 78.25,
+    "status": "active",
+    "effective_date": "2024-02-20",
+    "expiration_date": "2025-02-20"
+  }
+]

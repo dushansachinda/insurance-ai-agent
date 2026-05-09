@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+build/
+dist/
+.next/
+.cache/
+
+# Environment files (keep .env.example committed)
+.env
+.env.*
+!.env.example
+!*.env.example
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Logs and PIDs (managed by start-services.sh / stop-services.sh)
+logs/*.log
+logs/*.pid
+!logs/.gitkeep

@@ -1,0 +1,77 @@
+[
+  {
+    "customer_id": "CUST-0001",
+    "first_name": "Alice",
+    "last_name": "Johnson",
+    "email": "alice.johnson@example.com",
+    "phone": "+1-415-555-0142",
+    "dob": "1988-03-14",
+    "ssn_last4": "4821",
+    "address": {
+      "street": "742 Evergreen Terrace",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94110"
+    }
+  },
+  {
+    "customer_id": "CUST-0002",
+    "first_name": "Bob",
+    "last_name": "Smith",
+    "email": "bob.smith@example.com",
+    "phone": "+1-512-555-0188",
+    "dob": "1979-11-02",
+    "ssn_last4": "1029",
+    "address": {
+      "street": "1100 Congress Ave",
+      "city": "Austin",
+      "state": "TX",
+      "zip": "78701"
+    }
+  },
+  {
+    "customer_id": "CUST-0003",
+    "first_name": "Carol",
+    "last_name": "Davis",
+    "email": "carol.davis@example.com",
+    "phone": "+1-206-555-0167",
+    "dob": "1995-06-21",
+    "ssn_last4": "7733",
+    "address": {
+      "street": "455 Pine Street",
+      "city": "Seattle",
+      "state": "WA",
+      "zip": "98101"
+    }
+  },
+  {
+    "customer_id": "CUST-0004",
+    "first_name": "David",
+    "last_name": "Martinez",
+    "email": "david.martinez@example.com",
+    "phone": "+1-303-555-0119",
+    "dob": "1982-09-30",
+    "ssn_last4": "5560",
+    "address": {
+      "street": "88 Larimer St",
+      "city": "Denver",
+      "state": "CO",
+      "zip": "80202"
+    }
+  },
+  {
+    "customer_id": "CUST-0005",
+    "first_name": "Emma",
+    "last_name": "Nguyen",
+    "email": "emma.nguyen@example.com",
+    "phone": "+1-617-555-0177",
+    "dob": "1990-12-05",
+    "ssn_last4": "9014",
+    "address": {
+      "street": "210 Beacon St",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02116"
+    }
+  }
+]
