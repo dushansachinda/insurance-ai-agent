@@ -19,7 +19,7 @@ const features = [
     icon: <Sparkles className="w-6 h-6" />,
     title: "Conversational support",
     description:
-      "Ask the InsureCo agent anything: policy details, claim status, coverage questions.",
+      "Ask the Demo Insurance Corp agent anything: policy details, claim status, coverage questions.",
   },
   {
     icon: <FileText className="w-6 h-6" />,
@@ -48,7 +48,7 @@ const HomePage: React.FC = () => {
             Insurance that thinks alongside you.
           </h1>
           <p className="mt-5 text-lg text-slate-600 leading-relaxed">
-            WSO2 InsureCo combines a modern insurance backend with an AI agent
+            Demo Insurance Corp combines a modern insurance backend with an AI agent
             that handles applications, claims and customer support end-to-end.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">

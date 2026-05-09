@@ -1,4 +1,4 @@
-"""FastAPI WebSocket service for the WSO2 InsureCo supervisor agent.
+"""FastAPI WebSocket service for the Demo Insurance Corp supervisor agent.
 
 Each session_id maps to a long-lived AutoGen Swarm team. Inbound user messages
 are run through `team.run_stream(...)` and the resulting events are translated
@@ -23,7 +23,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="WSO2 InsureCo Supervisor Agent")
+app = FastAPI(title="Demo Insurance Corp Supervisor Agent")
 
 
 class _Session:

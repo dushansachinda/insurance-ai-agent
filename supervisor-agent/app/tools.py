@@ -1,4 +1,4 @@
-"""HTTP-backed tools for the WSO2 InsureCo agents.
+"""HTTP-backed tools for the Demo Insurance Corp agents.
 
 All functions are plain async callables. AutoGen 0.4+ introspects type hints
 and docstrings to expose them to the LLM as tools. No auth wrappers - the
@@ -63,7 +63,7 @@ async def create_customer(
     state: str,
     zip_code: str,
 ) -> dict:
-    """Create a new customer in the InsureCo system.
+    """Create a new customer in the Demo Insurance Corp system.
 
     Args:
         first_name: Customer's given name.
@@ -207,7 +207,7 @@ async def list_customer_claims(customer_id: str) -> list:
 # ---------------------------------------------------------------------------
 
 async def search_knowledge_base(query: str, limit: int = 5) -> list:
-    """Search the InsureCo knowledge base for relevant articles.
+    """Search the Demo Insurance Corp knowledge base for relevant articles.
 
     Args:
         query: Free-text search query (e.g. 'how do deductibles work').

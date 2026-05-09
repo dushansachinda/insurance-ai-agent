@@ -1,6 +1,6 @@
-# InsureCo Frontend
+# Demo Insurance Corp Frontend
 
-React 18 + TypeScript + Tailwind CSS frontend for the WSO2 InsureCo AI Agent demo.
+React 18 + TypeScript + Tailwind CSS frontend for the Demo Insurance Corp AI Agent demo.
 
 ## Quick Start
 

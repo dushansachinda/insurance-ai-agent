@@ -1,4 +1,4 @@
-"""AutoGen agent wiring for the WSO2 InsureCo assistant.
+"""AutoGen agent wiring for the Demo Insurance Corp assistant.
 
 Architecture: a single `AssistantAgent` named `insurance_assistant` that owns
 every tool (customer / application / policy / claim / KB / credit check).

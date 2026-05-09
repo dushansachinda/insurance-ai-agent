@@ -1,6 +1,6 @@
 {
-  "short_name": "InsureCo",
-  "name": "WSO2 InsureCo",
+  "short_name": "Demo Insurance",
+  "name": "Demo Insurance Corp",
   "icons": [],
   "start_url": ".",
   "display": "standalone",

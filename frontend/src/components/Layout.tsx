@@ -11,7 +11,7 @@ const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
       </main>
       <footer className="border-t border-slate-200 bg-white">
         <div className="max-w-7xl mx-auto px-6 py-4 text-xs text-slate-500 flex justify-between">
-          <span>WSO2 InsureCo &middot; AI agent demo</span>
+          <span>Demo Insurance Corp &middot; AI agent demo</span>
           <span>Not a real insurance product</span>
         </div>
       </footer>

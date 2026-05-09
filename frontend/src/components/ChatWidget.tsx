@@ -45,7 +45,7 @@ const ChatWidget: React.FC = () => {
               </span>
               <div>
                 <div className="text-sm font-semibold text-slate-900">
-                  InsureCo Assistant
+                  Demo Insurance Corp Assistant
                 </div>
                 <div className="text-[11px] text-slate-500 capitalize">
                   {status === "thinking" ? "thinking..." : status}
@@ -69,7 +69,7 @@ const ChatWidget: React.FC = () => {
             {messages.length === 0 && status !== "connecting" && (
               <div className="text-center text-sm text-slate-500 mt-12">
                 <p className="font-medium text-slate-700">
-                  Hi! I am the InsureCo agent.
+                  Hi! I am the Demo Insurance Corp agent.
                 </p>
                 <p className="mt-1">
                   Ask about your policies, file a claim, or get a quote.

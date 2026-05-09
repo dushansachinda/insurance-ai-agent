@@ -1,6 +1,6 @@
 # Supervisor Agent
 
-AutoGen-based multi-agent orchestrator for the WSO2 InsureCo demo. A FastAPI
+AutoGen-based multi-agent orchestrator for the Demo Insurance Corp demo. A FastAPI
 service exposes a WebSocket chat endpoint that routes a single user
 conversation across a team of specialist agents.
 
@@ -27,7 +27,7 @@ Copy `.env.example` to `.env` and fill in:
 | `GEMINI_API_KEY` | _(required)_ | Google AI Studio API key. |
 | `GEMINI_MODEL` | `gemini-2.5-flash` | Gemini chat model used by every agent. |
 | `GEMINI_BASE_URL` | `https://generativelanguage.googleapis.com/v1beta/openai/` | Gemini's OpenAI-compatible endpoint. |
-| `BACKEND_BASE_URL` | `http://backend:8001` | InsureCo REST backend. |
+| `BACKEND_BASE_URL` | `http://backend:8001` | Demo Insurance Corp REST backend. |
 | `MCP_CREDIT_CHECK_URL` | `http://mcp-credit-check:8003/mcp` | Credit-bureau MCP server. |
 | `LOG_LEVEL` | `info` | Python log level. |
 

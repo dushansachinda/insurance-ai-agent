@@ -85,7 +85,7 @@ async def credit_check(customer_id: str, ssn_last4: str) -> dict:
     """Run a credit check via the external MCP credit bureau service.
 
     Args:
-        customer_id: The InsureCo customer_id (e.g. 'CUST-0001').
+        customer_id: The Demo Insurance Corp customer_id (e.g. 'CUST-0001').
         ssn_last4: Last 4 digits of SSN, used to verify identity at the bureau.
 
     Returns a dict with at least `score`, `risk_tier`, and `decision`.

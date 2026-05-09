@@ -23,7 +23,7 @@ const Header: React.FC = () => {
             <Shield className="w-5 h-5" />
           </span>
           <span className="font-semibold text-slate-900 text-lg tracking-tight">
-            WSO2 InsureCo
+            Demo Insurance Corp
           </span>
         </NavLink>
 
